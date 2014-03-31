@@ -53,7 +53,7 @@
 \usepackage[utf8]{inputenc} %unicode support
 %\usepackage[applemac]{inputenc} %applemac support if unicode package fails
 %\usepackage[latin1]{inputenc} %UNIX support if unicode package fails
-
+\usepackage{graphicx}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                                             %%
@@ -241,23 +241,89 @@ Text for this section.
 \section*{Introduction}
 One of the most challenging and intriguing problems in the postgenomic era is the characterization
 of the biochemical functions of proteins. Accurate computational assignment of protein function is becoming a useful resource for
-both the community at large and the curators that eventually assign function to proteins. It is known that domains appear either singly or in combination with other domains as building blocks in a protein\\cite{Apic2001}\\cite{Wang2006}. Domains play important roles in the process of protein-protein interactions which determine the function of the protein\\cite{Bork1999}. Identifying functions of domains provides key clues in the annotation of protein functions. Since the number of domains is relatively finite while the number of unannotated proteins is considerably large, it will be much easier to infer the function of proteins if the functions of their component domains are determined. Therefore, there is a great need to develop accurate computational methods for domain function annotation.
+both the community at large and the curators that eventually assign function to proteins. It is known that domains appear either singly or in combination with other domains as building blocks in a protein cite{Apic2001} cite{Wang2006}. Domains play important roles in the process of protein-protein interactions which determine the function of the protein cite{Bork1999}. Identifying functions of domains provides key clues in the annotation of protein functions. Since the number of domains is relatively finite while the number of unannotated proteins is considerably large, it will be much easier to infer the function of proteins if the functions of their component domains are determined. Therefore, there is a great need to develop accurate computational methods for domain function annotation.
 
 Traditional work of annotation of functions is based on the physicochemical properties of special structure and primarily conducted manually, which is a time-consuming, low-efficient and experience-dependent process. Moreover, with the rapid growth of proteins and domains, manual annotation becomes increasing infeasible. To deal with this problem, researchers introduced computational methods into the field of function annotation, in order to simplify and improve the work.
 
-Despite a variety of the strategies and methods have used in identifying protein functions, only a few researchers have paid attentions to the field of domain annotation. For which only a relatively small number of domains have been annotated until now, several innovative methods have been proposed to predict domain function. Schug \\textit{et al.}\\cite{Schug2002} described a heuristic algorithm for associating Gene Ontology (GO)\\cite{Ashburner2000} defined molecular functions to proteins as listed in the ProDom\\cite{Corpet2000} and CDD\\cite{Marchler2003} databases. The algorithm generates rules for function-domain associations based on the intersection of functions assigned to gene products by the GO consortium that contain ProDom and/or CDD domains at varying levels of sequence similarity. Lu \\textit{et al.}\\cite{Lu2004} utilized protein-domain mapping (P2D) features to construct a logistic regression model to investigate the association rules between target domains and GO terms.
+Despite a variety of the strategies and methods have used in identifying protein functions, only a few researchers have paid attentions to the field of domain annotation. For which only a relatively small number of domains have been annotated until now, several innovative methods have been proposed to predict domain function. Schug  textit{et al.} cite{Schug2002} described a heuristic algorithm for associating Gene Ontology (GO) cite{Ashburner2000} defined molecular functions to proteins as listed in the ProDom cite{Corpet2000} and CDD cite{Marchler2003} databases. The algorithm generates rules for function-domain associations based on the intersection of functions assigned to gene products by the GO consortium that contain ProDom and/or CDD domains at varying levels of sequence similarity. Lu textit{et al.} cite{Lu2004} utilized protein-domain mapping (P2D) features to construct a logistic regression model to investigate the association rules between target domains and GO terms.
 
-Recently, domain-domain interaction information has provided a new way to predict domain function, since it's rational to assume that interacting domains have a high probability to share similar functions. Deng \\textit{et al.}\\cite{Deng2002} applied a Maximum Likelihood Estimation method to infer interaction domains that are consistent with the observed protein-protein interaction. Their method showed robustness in analyzing incomplete data sets and dealing with various experimental errors. Moreover, some researchers utilize domain coexisting features to predict domain function. For example, Wang \\textit{et al.}\\cite{Wang2007} gave a general framework to predict protein interactions by considering the information of both multi-domains and multi organisms, which can also be applied to identify cooperative domains, further to annotate functions of domains.
+Recently, domain-domain interaction information has provided a new way to predict domain function, since it's rational to assume that interacting domains have a high probability to share similar functions. Deng \textit{et al.} cite{Deng2002} applied a Maximum Likelihood Estimation method to infer interaction domains that are consistent with the observed protein-protein interaction. Their method showed robustness in analyzing incomplete data sets and dealing with various experimental errors. Moreover, some researchers utilize domain coexisting features to predict domain function. For example, Wang \textit{et al.} cite{Wang2007} gave a general framework to predict protein interactions by considering the information of both multi-domains and multi organisms, which can also be applied to identify cooperative domains, further to annotate functions of domains.
 
-Based on the previous works, Zhao and Wang\\cite{Zhao2008} designed two methods, the threshold-based classification method and the support vector machine method, for protein domain function prediction by integrating heterogeneous information sources, including protein-domain mapping features(P2D)\\cite{Lu2004}, domain-domain interactions(DDI)\\cite{Deng2002}, and domain coexisting features(CDD)\\cite{Wang2007}, improving not only prediction accuracy but also annotation reliability. During these two methods, the threshold-based classification method outperforms the support vector machine method according to Zhao's\\cite{Zhao2008} experiments.
+Based on the previous works, Zhao and Wang cite{Zhao2008} designed two methods, the threshold-based classification method and the support vector machine method, for protein domain function prediction by integrating heterogeneous information sources, including protein-domain mapping features(P2D) cite{Lu2004}, domain-domain interactions(DDI) cite{Deng2002}, and domain coexisting features(CDD) cite{Wang2007}, improving not only prediction accuracy but also annotation reliability. During these two methods, the threshold-based classification method outperforms the support vector machine method according to Zhao's cite{Zhao2008} experiments.
 
 In those traditional learning formalizations, each domain is represented by an instance (or feature vector) and associated with single GO term. Although the above single instance and single label formalization is prevailing and successful, it is not an appropriate model for the actual situation of domain function annotation. In fact, each domain usually exists in multiple proteins, which can be described by a feature vector, and the domain can belong to multiple categories since it is associated with some different functions.
 
-In this paper, we propose a novel Multi-Instance Multi-Label Learning (MIML)\\cite{Zhou2012} based framework, PDAMIML, to predict functions of protein domains accurately. PDAMIML combines MIML model, support vector machine\\cite{Vapnik1998} and auto-cross covariance\\cite{Wold1993} to overcome the multi-label classification problem and effectively utilize the features of Position-Specific Scoring Matrix (PSSM)\\cite{Stephen1997}. Furthermore, we design an ensemble method, PDAMIML-ensemble, that integrates PDAMIML and other two eminent threshold-based approaches (CDD and P2D\\cite{Zhao2008}) with majority voting strategy. Our experimental results show that PDAMIML-ensemble significantly outperforms the state-of-the-art domain annotation approaches.
+In this paper, we propose a novel Multi-Instance Multi-Label Learning (MIML) cite{Zhou2012} based framework, PDAMIML, to predict functions of protein domains accurately. PDAMIML combines MIML model, support vector machine cite{Vapnik1998} and auto-cross covariance cite{Wold1993} to overcome the multi-label classification problem and effectively utilize the features of Position-Specific Scoring Matrix (PSSM) cite{Stephen1997}. Furthermore, we design an ensemble method, PDAMIML-ensemble, that integrates PDAMIML and other two eminent threshold-based approaches (CDD and P2D cite{Zhao2008}) with majority voting strategy. Our experimental results show that PDAMIML-ensemble significantly outperforms the state-of-the-art domain annotation approaches.
 
 \section*{Materials and Methods}
 \subsection*{Datasets}
-Relationships between proteins and domains are obtained from InterPro Database\\cite{Sarah2011}. The function annotations of domains are generated from GOA Database\\cite{Evelyn2003}. InterPro contains three main entities: proteins, signatures and entries. The signatures from InterPro comes from 11 member databases, including Pfam\\cite{Bateman2002}, ProDom\\cite{Corpet1999}, etc. The protein-domain-function dataset contains 13137 proteins, 5748 domains, and 2535 GO terms. Around 76\% domains are annotated with more than one GO term, and every domain has 2.5 annotations on average. We choose the top 100 domain with the most GO terms as the data set, and then filter sparse labels which are inconvenient for study, select the most frequent 10 GO terms as target labels out of the total 188 labels attached to the top 100 domains according to their frequency. The diagram of frequency of GO terms is showed in Fig.\\ref{goterms} and the definition of the 10 GO terms we select is demonstrated in TABLE \\ref{definition}. Each protein can be viewed as an instance and each domain is represented as a bag of instances.
+Relationships between proteins and domains are obtained from InterPro Database cite{Sarah2011}. The function annotations of domains are generated from GOA Database cite{Evelyn2003}. InterPro contains three main entities: proteins, signatures and entries. The signatures from InterPro comes from 11 member databases, including Pfam cite{Bateman2002}, ProDom cite{Corpet1999}, etc. The protein-domain-function dataset contains 13137 proteins, 5748 domains, and 2535 GO terms. Around 76\% domains are annotated with more than one GO term, and every domain has 2.5 annotations on average. We choose the top 100 domain with the most GO terms as the data set, and then filter sparse labels which are inconvenient for study, select the most frequent 10 GO terms as target labels out of the total 188 labels attached to the top 100 domains according to their frequency. The diagram of frequency of GO terms is showed in Fig.ref{goterms} and the definition of the 10 GO terms we select is demonstrated in TABLE  ref{definition}. Each protein can be viewed as an instance and each domain is represented as a bag of instances.
+
+  \begin{figure}[h!]
+  
+  \caption{\csentence{GO terms and their frequency.}
+      A short description of the figure content
+      should go here.}
+  \end{figure}
+  
+  \begin{table}[h!]
+    \caption{Selected GO terms and their definition. This is where the description of the table should go.}
+      \begin{tabular}{ll}
+    \hline
+    GO term ID  &Definition\\
+    \hline
+    GO:0005737  &cytoplasm\\[2pt]
+    GO:0003677  &DNA binding\\[2pt]
+    GO:0005524  &ATP binding\\[2pt]
+    GO:0005506  &iron ion binding\\[2pt]
+    GO:0055114  &oxidation-reduction process\\[2pt]
+    GO:0000166  &nucleotide binding\\[2pt]
+    GO:0003700  &DNA binding transcription factor activity\\[2pt]
+    GO:0020037  &heme binding\\[2pt]
+    GO:0006355  &regulation of transcription, DNA-dependent\\[2pt]
+    GO:0005634  &nucleus\\
+    \hline
+    \end{tabular}
+  \end{table}
+
+In each experiment, the whole data set is randomly partitioned into two parts, a training set, accounting for 70\% of the data set, and a test set, 30\%. The training set is used to build classifiers, and the test set is used to evaluate the performance of the corresponding classifier. The whole experiment is repeated for 10 times to get an average and common performance, and every time, all the model parameters are tuned with 10-fold cross validation on the training set to optimize the model performance.
+
+\subsection*{MIML for domain annotation}
+In this section, we first describe in detail how to formulate protein domain annotation as an MIML problem.
+
+A protein domain is a conserved part of a given protein sequence and structure that can evolve, function, and exist independently of the rest of the protein chain. Many proteins consist of several structural domains; meanwhile one domain may appear in a variety of different proteins. Molecular evolution uses domains as building blocks and these may be recombined in different arrangements to create proteins with function cite{Heringa2005}. Besides acting as the structural unit of proteins, domains often form functional units. In a multi-domain protein, each domain may fulfill its own function independently, or in a concerted manner with its neighbors cite{Heringa2005}. Since proteins interact with each other through domain interactions, the functions of domains determine the functions of their host proteins. From the analysis above, we realize that domains act as the structural and functional units, and proteins and functions are connected by those particular domains, as though some departments with special functions if the whole protein is compared to a complex factory. Each domain is associated with multiple proteins and multiple GO terms derived from its various interaction with other domains.
+
+However, the recent work of domain function annotation still focuses on single label prediction and uses one vector to represent one domain, since there was no explicit relationship between some particular domains and some specific function and no efficient framework to deal with multi-instance and multi-label problem. In addition, the annotation work in particular domain with multi-instance is much more sophisticated and difficult than the work with single-instance.
+
+As illustrated in Fig.ref{model}, we propose a novel MIML cite{Zhou2007} based method, which combines support vector machine and auto-cross covariance transformation, to improve the prediction performance in domain anntation.
+
+  \begin{figure}[h!]
+  \caption{\csentence{Sample figure title.}
+      A short description of the figure content
+      should go here.}
+  \end{figure}
+  
+
+\subsection*{PDAMIML framework}
+
+\subsection*{Auto-cross covariance transformation}
+
+\subsection*{Majority voting} 
+
+\subsection*{Evaluation measures}
+
+\section*{Results and discussions}
+\subsection*{The impacts of $LG$}
+
+\subsection*{Performance comparison with the state-of-the-art approaches}
+
+\subsection*{Performance comparison on different single labels}
+
+
+
+\section*{Conclusion}
+
+
 \subsubsection*{Sub-sub heading for section}
 Text for this sub-sub-heading \ldots
 \paragraph*{Sub-sub-sub heading for section}
@@ -355,12 +421,12 @@ Thus we observe that this expected value is finite for all $v>0$ (also see \cite
   \caption{\csentence{Sample figure title.}
       A short description of the figure content
       should go here.}
-      \end{figure}
+  \end{figure}
 
 \begin{figure}[h!]
   \caption{\csentence{Sample figure title.}
       Figure legend text.}
-      \end{figure}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%                               %%
